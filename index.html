@@ -138,7 +138,12 @@ width:50%;
 <input type="text" id="billno" class="form-control mb-2" placeholder="Bill No">
 
 <input type="number" id="pax" class="form-control mb-2" placeholder="No of Pax">
-
+<!-- From Uiverse.io by Shoh2008 --> 
+<div class="checkbox-wrapper-8 p-2 ">
+   
+  <input type="checkbox" id="cb3-8" class="tgl tgl-skewed">
+  <label for="cb3-8"  data-tg-on="Online" data-tg-off="Walk-in " class="tgl-btn"></label>
+</div>
 <!-- room selet -->
 <label class="mb-2">Room No</label>
 
@@ -322,6 +327,7 @@ Download PNG
 
 <p><span class="label">No of Rooms :</span> <span id="prooms"></span></p>
 
+<p><span class="label">Booking :</span> <span id="pbooking"></span></p>
 </div>
 
 </div>
@@ -474,6 +480,15 @@ let discountValue = discountwithgst / 1.05 ;
 let extraamoutwithingst =  parseFloat(extraharge.value) || 0 ;
 
 let extraharges = extraamoutwithingst / 1.05 ;
+
+// BOOKING TYPE (Walk-in / Online)
+let bookingSwitch = document.getElementById("cb3-8");
+
+if (bookingSwitch.checked) {
+    document.getElementById("pbooking").innerText = "Online";
+} else {
+    document.getElementById("pbooking").innerText = "Walk-in";
+}
 
 // ---------- ROOM SELECTION ----------
 let selectedRooms = [];
