@@ -394,9 +394,9 @@ Download PNG
 </div>
 
 <script>
-function calculateHours() {
+function calculateHoursFormatted() {
   if (!checkin.value || !checkout.value || !checkintime.value || !checkouttime.value) {
-    return 0;
+    return "0 hr";
   }
 
   let inDateTime = new Date(checkin.value + "T" + checkintime.value);
@@ -404,11 +404,14 @@ function calculateHours() {
 
   let diff = outDateTime - inDateTime;
 
-  let hours = diff / (1000 * 60 * 60);
+  if (diff <= 0) return "0 hr";
 
-  if (hours <= 0) return 0;
+  let totalMinutes = Math.floor(diff / (1000 * 60));
 
-  return Math.ceil(hours); // round up
+  let hrs = Math.floor(totalMinutes / 60);
+  let mins = totalMinutes % 60;
+
+  return `${hrs} hr ${mins.toString().padStart(2, '0')} min`;
 }
 
 
@@ -633,7 +636,7 @@ if(isHourly){
     <tr>
     <td>${room}</td>
     <td>${type} (Hourly)</td>
-    <td>${hours} hrs</td>
+<td>${calculateHoursFormatted()}</td>
     <td>${perRoom.toFixed(2)}</td>
     <td>${perRoom.toFixed(2)}</td>
     </tr>
@@ -760,8 +763,8 @@ toggle.addEventListener("change", function () {
   if (this.checked) {
     hoursBox.style.display = "block";
 
-    let hrs = calculateHours();
-     usedHoursInput.innerText = hrs + " Hours";
+   let hrs = calculateHoursFormatted();
+usedHoursInput.innerText = hrs;
   } else {
     hoursBox.style.display = "none";
     usedHoursInput.value = "";
