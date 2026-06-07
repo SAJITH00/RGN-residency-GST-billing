@@ -647,7 +647,7 @@ if(isHourly){
     // ✅ NORMAL DAY MODE
     amount = price * days;
 
-    subtotal += (amount-discountValue);
+    subtotal += (amount+extraharges-discountValue);
 
     tbody.innerHTML += `
     <tr>
